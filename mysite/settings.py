@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-r(!-c6!av^f9k9jrug@=307^c3$h^_69$r0#umemcui)bx(t+j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["blog-blog-ttpwxr-68b25f-194-163-173-1.traefik.me"]
+ALLOWED_HOSTS = ["blog.djokodev.com"]
 
 
 SITE_ID = 1
