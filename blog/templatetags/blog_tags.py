@@ -16,15 +16,6 @@ def total_posts():
 
 @register.inclusion_tag("blog/post/latest_posts.html")
 def show_latest_posts(count=5):
-    """
-    Renders the latest published posts using latest_posts.html template.
-
-    Args:
-        count (int): Number of latest posts to display. Defaults to 5.
-
-    Returns:
-        dict: Context containing latest posts for the template.
-    """
     latest_posts = Post.published.order_by("-publish")[:count]
     return {"latest_posts": latest_posts}
 

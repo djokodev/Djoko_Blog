@@ -5,13 +5,10 @@ services:
       # Volume pour les fichiers statiques (partagé avec nginx)
       - static_volume:/app/staticfiles
       # Volume pour les fichiers médias (partagé avec nginx)
-      - media_volume:/app/mediafiles
-      # Optionnel: Monter le code source pour le développement, mais pas idéal pour simuler la prod
-      # Si vous voulez simuler la prod, enlevez cette ligne car le code est copié par le Dockerfile
+      # Ajustement pour utiliser /app/media au lieu de /app/mediafiles
+      - media_volume:/app/media
+      # Optionnel: Monter le code source pour le développement
       - .:/app
-    # Plus besoin d'exposer le port ici, Nginx s'en occupe
-    # ports:
-    #  - "8000:8000" # Supprimé/Commenté
     depends_on:
       - db
     env_file:
@@ -35,18 +32,18 @@ services:
       - "80:80"
     volumes:
       # Monter la configuration Nginx
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Adaptez si vous mettez nginx.conf ailleurs
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
       # Partager le volume des fichiers statiques (lecture seule pour nginx)
       - static_volume:/app/staticfiles:ro
       # Partager le volume des fichiers médias (lecture seule pour nginx)
-      - media_volume:/app/mediafiles:ro
+      # Ajustement pour utiliser /app/media au lieu de /app/mediafiles
+      - media_volume:/app/media:ro
     depends_on:
-      # S'assurer que le service web est démarré avant nginx (pas une garantie qu'il soit prêt)
+      # S'assurer que le service web est démarré avant nginx
       - web
     restart: always
 
 volumes:
   postgres_data:
-  # Définir les volumes nommés pour les statiques et médias
   static_volume:
   media_volume:
