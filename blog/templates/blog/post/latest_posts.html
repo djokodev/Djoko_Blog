@@ -1,0 +1,14 @@
+<div class="latest-posts-widget">
+  <ul>
+    {% for post in latest_posts %}
+      <li>
+        <a href="{{ post.get_absolute_url }}">
+          <span class="post-title">{{ post.title }}</span>
+          <span class="post-date">{{ post.publish|date:"j M Y" }}</span>
+        </a>
+      </li>
+    {% empty %}
+      <li class="no-posts">Aucun article disponible pour le moment.</li>
+    {% endfor %}
+  </ul>
+</div>

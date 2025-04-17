@@ -1,0 +1,58 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% load static %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block content %}
+  <div class="search-header">
+    <h1>Recherche</h1>
+    {% if query %}
+      <h2>Résultats pour "{{ query }}"</h2>
+    {% endif %}
+  </div>
+
+  <div class="search-form">
+    <form method="get">
+      {{ form.as_p }}
+      <input type="submit" value="Rechercher">
+    </form>
+  </div>
+
+  {% if query %}
+    <div class="posts-container">
+      {% for post in results %}
+        <article class="post">
+          <div class="post-content">
+            <h2>
+              <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </h2>
+            
+            <div class="post-meta">
+              <p class="date">{{ post.publish|date:"j M Y" }}</p>
+              <p class="reading-time">{{ post.body|wordcount|divisibleby:250|add:3 }} min de lecture</p>
+            </div>
+            
+            <div class="post-excerpt">
+              {{ post.body|truncatewords_html:25|safe }}
+            </div>
+            
+            <a href="{{ post.get_absolute_url }}" class="read-more">Lire la suite</a>
+          </div>
+          
+          {% if post.image %}
+          <div class="post-image">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+          </div>
+          {% else %}
+          <div class="post-image">
+            <img src="{% static 'images/default-post-image.jpg' %}" alt="Image par défaut">
+          </div>
+          {% endif %}
+        </article>
+      {% empty %}
+        <p class="no-posts">Aucun résultat trouvé pour "{{ query }}".</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

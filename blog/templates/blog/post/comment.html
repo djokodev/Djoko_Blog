@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}Ajouter un commentaire{% endblock %}
+
+{% block content %}
+<div class="comment-page-container">
+  {% if comment %}
+    <div class="success-message">
+      <h2>Votre commentaire a été ajouté avec succès.</h2>
+      <div class="confirmation-message">
+        <p>Merci pour votre contribution à la discussion!</p>
+        <div class="action-buttons">
+          <a href="{{ post.get_absolute_url }}" class="back-to-post">Retour à l'article</a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="standalone-comment-form">
+      <h1>Ajouter un commentaire</h1>
+      <p class="comment-intro">Vous commentez l'article <strong>"{{ post.title }}"</strong></p>
+      {% include "blog/post/includes/comment_form.html" %}
+      <div class="form-footer">
+        <a href="{{ post.get_absolute_url }}" class="cancel-link">Retour à l'article</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}Partager un article{% endblock %}
+
+{% block content %}
+<div class="share-container">
+  {% if sent %}
+    <div class="success-message">
+      <h1>E-mail envoyé avec succès</h1>
+      <div class="confirmation-message">
+        <p>
+          L'article "{{ post.title }}" a été envoyé avec succès à {{ form.cleaned_data.to }}.
+        </p>
+        <div class="action-buttons">
+          <a href="{{ post.get_absolute_url }}" class="back-to-post">Retour à l'article</a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="share-form-container">
+      <h1>Partager "{{ post.title }}" par e-mail</h1>
+      
+      {% if post.image %}
+      <div class="share-image">
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="thumbnail">
+      </div>
+      {% endif %}
+      
+      <form method="post" class="share-form">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <div class="form-actions">
+          <input type="submit" value="Envoyer par e-mail">
+          <a href="{{ post.get_absolute_url }}" class="cancel-button">Annuler</a>
+        </div>
+      </form>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

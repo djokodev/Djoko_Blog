@@ -1,0 +1,48 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% load static %}
+
+{% block title %}{% if tag %}{{ tag.name }}{% else %}Accueil{% endif %}{% endblock %}
+
+{% block content %}
+  <div class="posts-header">
+    {% if tag %}
+      <div class="current-tag">
+        <h2>Articles avec le tag "{{ tag.name }}"</h2>
+        <a href="{% url 'blog:post_list' %}" class="back-link">Retour à tous les articles</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="posts-container">
+    {% for post in posts %}
+      <article class="post">
+        {% if post.image %}
+        <div class="post-image">
+          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        </div>
+        {% endif %}
+        
+        <div class="post-content">
+          <h2>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+          </h2>
+          
+          <div class="post-meta">
+            <p class="date">{{ post.publish|date:"j M Y" }}</p>
+          </div>
+          
+          <div class="post-excerpt">
+            {{ post.body|truncatewords_html:25|safe }}
+          </div>
+          
+          <a href="{{ post.get_absolute_url }}" class="read-more">Lire la suite</a>
+        </div>
+      </article>
+    {% empty %}
+      <p class="no-posts">Aucun article disponible pour le moment.</p>
+    {% endfor %}
+  </div>
+
+  {% include "pagination.html" with page=posts %}
+{% endblock %}
