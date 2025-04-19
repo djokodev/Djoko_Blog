@@ -26,14 +26,6 @@ COPY . .
 
 RUN mkdir -p /app/staticfiles /app/media
 
-# Exécuter collectstatic
-# --noinput évite les questions interactives
-RUN python manage.py collectstatic --noinput
 
 # Exposer le port que Gunicorn utilisera (interne au réseau Docker)
 EXPOSE 8000
-
-# Lancer Gunicorn
-# Remplacer 'mysite.wsgi:application' par le chemin vers votre fichier wsgi.py
-# Le nombre de workers (ex: 3) dépendra des ressources de votre serveur.
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "mysite.wsgi:application"]
