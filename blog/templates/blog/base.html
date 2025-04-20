@@ -8,6 +8,10 @@
   <title>{% block title %}{% endblock %} | Djoko's Blog</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+  {# PrismJS CSS (Thème Okaidia) #}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+  {# PrismJS Copy to Clipboard Plugin CSS #}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
   {% block extra_head %}{% endblock %}
 </head>
 <body>
@@ -75,5 +79,14 @@
   <footer class="site-footer">
     <p>&copy; {% now "Y" %} Djoko's Blog. Tous droits réservés.</p>
   </footer>
+
+  {# PrismJS Core JS #}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  {# PrismJS Autoloader (charge les langages nécessaires) #}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  {# PrismJS Toolbar Plugin (base pour les boutons) #}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  {# PrismJS Copy to Clipboard Plugin JS #}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 </body>
 </html>

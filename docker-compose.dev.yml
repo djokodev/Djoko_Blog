@@ -34,7 +34,7 @@ services:
       - "80:80"
     volumes:
       # Monter la configuration Nginx
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf/default.conf:/etc/nginx/conf.d/default.conf
       # Partager le volume des fichiers statiques (lecture seule pour nginx)
       - static_volume:/app/staticfiles:ro
       # Partager le volume des fichiers médias (lecture seule pour nginx)
