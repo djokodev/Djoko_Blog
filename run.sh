@@ -8,4 +8,4 @@ python manage.py collectstatic --noinput
 
 sleep 3
 
-gunicorn --bind 0.0.0.0:8000 --workers 2 mysite.wsgi:application
+exec gunicorn --bind 0.0.0.0:8000 --workers 2 mysite.wsgi:application

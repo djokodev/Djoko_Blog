@@ -29,3 +29,7 @@ RUN mkdir -p /app/staticfiles /app/media
 
 # Exposer le port que Gunicorn utilisera (interne au réseau Docker)
 EXPOSE 8000
+
+#Start Generation Here
+RUN chmod +x run.sh
+CMD ["./run.sh"]
