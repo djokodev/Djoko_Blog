@@ -1,6 +1,8 @@
 services:
   web:
     build: .
+    # en local
+    # command: ["./run.sh"]
     volumes:
       # Volume pour les fichiers statiques (partagé avec nginx)
       - static_volume:/app/staticfiles

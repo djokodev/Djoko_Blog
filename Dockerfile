@@ -22,14 +22,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copier le reste du projet
 COPY . .
-
+RUN chmod +x run.sh
 
 RUN mkdir -p /app/staticfiles /app/media
-
 
 # Exposer le port que Gunicorn utilisera (interne au réseau Docker)
 EXPOSE 8000
 
-#Start Generation Here
-RUN chmod +x run.sh
-CMD ["./run.sh"]
+# Définir le script de démarrage par défaut en local
+# CMD ["sh", "/app/run.sh"]
