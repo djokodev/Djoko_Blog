@@ -12,6 +12,24 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
   {# PrismJS Copy to Clipboard Plugin CSS #}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+  {% block meta_tags %}
+    <meta name="description" content="Bienvenue sur Djoko's Blog, un espace pour partager des réflexions techniques et personnelles.">
+    <meta name="keywords" content="blog, Django, SEO, développement web, tutoriels">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{{ request.build_absolute_uri }}{% static 'images/default-og-image.jpg' %}">
+    <meta property="og:title" content="{% block title %}{% endblock %} | Djoko's Blog">
+    <meta property="og:description" content="Bienvenue sur Djoko's Blog, un espace pour partager des réflexions techniques et personnelles.">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block title %}{% endblock %} | Djoko's Blog">
+    <meta name="twitter:description" content="Bienvenue sur Djoko's Blog, un espace pour partager des réflexions techniques et personnelles.">
+    <meta name="twitter:image" content="{{ request.build_absolute_uri }}{% static 'images/default-og-image.jpg' %}">
+    <!-- RSS & Sitemap -->
+    <link rel="alternate" type="application/rss+xml" title="Flux RSS de Djoko's Blog" href="{% url 'blog:post_feed' %}">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{% url 'django.contrib.sitemaps.views.sitemap' %}">
+  {% endblock meta_tags %}
   {% block extra_head %}{% endblock %}
 </head>
 <body>
