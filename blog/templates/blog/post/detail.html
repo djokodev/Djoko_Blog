@@ -14,7 +14,10 @@
   <meta property="og:title" content="{{ post.title }}">
   <meta property="og:description" content="{{ post.body|truncatechars_html:155|striptags }}">
   {% if post.image %}
-    <meta property="og:image" content="{{ request.build_absolute_uri }}{{ post.image.url }}">
+    <meta property="og:image"          content="{{ request.build_absolute_uri post.image.url }}">
+    <meta property="og:image:secure_url" content="{{ request.build_absolute_uri post.image.url }}">
+    <meta property="og:image:type"     content="image/{{ post.image.url|slice:'-3:' }}">
+    <meta property="og:image:width"    content="1200">
   {% else %}
     <meta property="og:image" content="{{ request.build_absolute_uri }}{% static 'images/default-og-image.jpg' %}">
   {% endif %}
@@ -23,7 +26,8 @@
   <meta name="twitter:title" content="{{ post.title }}">
   <meta name="twitter:description" content="{{ post.body|truncatechars_html:155|striptags }}">
   {% if post.image %}
-    <meta name="twitter:image" content="{{ request.build_absolute_uri }}{{ post.image.url }}">
+    <meta name="twitter:image"    content="{{ request.build_absolute_uri post.image.url }}">
+    <meta name="twitter:image:alt" content="{{ post.title }}">
   {% else %}
     <meta name="twitter:image" content="{{ request.build_absolute_uri }}{% static 'images/default-og-image.jpg' %}">
   {% endif %}
